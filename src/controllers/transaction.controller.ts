@@ -14,7 +14,7 @@ export class TransactionController {
     @Get()
     getAllTransactions(customerId: string = null, walletId: number = 0): Promise<Transaction[]> {
        
-        try{
+        try {
             if (customerId != null) {
                 return this.transactionService.getTransactionsByCustomer(customerId);
             }
