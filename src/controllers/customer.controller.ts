@@ -13,9 +13,9 @@ export class CustomerController {
             return active ? this.customerService.getAllActiveCustomers() :
                 this.customerService.getAllCustomers();
         }
-        catch(error){
+        catch (error) {
             // In this case, I have return a bad request but there are multiple possibilities of error depending on the business logic
-            throw new BadRequestException('Eroor occured while processing the request, '+error);
+            throw new BadRequestException('Eroor occured while processing the request, ' + error);
         }
     }
 
@@ -24,9 +24,9 @@ export class CustomerController {
         try{
             return this.customerService.getCustomerById(customerId);
         }
-        catch(error){
+        catch (error) {
             // In this case, I have return a bad request but there are multiple possibilities of error depending on the business logic
-            throw new BadRequestException('Eroor occured while processing the request, '+error);
+            throw new BadRequestException('Eroor occured while processing the request, ' + error);
         }
     }
 
@@ -41,9 +41,9 @@ export class CustomerController {
         try {
             return this.customerService.createCustomer(customer);
         }
-        catch {
+        catch (error) {
             // In this case, I have return a bad request but there are multiple possibilities of error depending on the business logic
-            throw new BadRequestException('Invalid request');
+            throw new BadRequestException('Invalid request ' + error);
         }
     }
 }

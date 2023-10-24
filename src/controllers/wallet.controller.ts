@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Param, BadRequestException } from '@nestjs
 import { Wallet } from 'src/entities/wallet.entity';
 import { WalletService } from 'src/services/wallet.service';
 
-@Controller('customers')
+@Controller('wallets')
 export class WalletController {
     constructor(private readonly walletService: WalletService) { }
 
@@ -41,9 +41,9 @@ export class WalletController {
         try {
             return this.walletService.createWallet(wallet);
         }
-        catch {
+        catch (error) {
             // In this case, I have return a bad request but there are multiple possibilities of error depending on the business logic
-            throw new BadRequestException('Invalid request');
+            throw new BadRequestException('Invalid request '+ error);
         }
     }
 }
