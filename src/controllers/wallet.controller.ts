@@ -8,18 +8,27 @@ export class WalletController {
 
     // Read wallets.
     @Get()
-    getAllWallets(active: boolean = false, customerId : string = null): Promise<Wallet[]> {
-
-        if(customerId != null){
-            return this.walletService.getWalletsByCustomer(customerId);
+    getAllWallets(active: boolean = false, customerId: string = null): Promise<Wallet[]> {
+        try {
+            if (customerId != null) {
+                return this.walletService.getWalletsByCustomer(customerId);
+            }
+            return active ? this.walletService.getActiveWallets() :
+                this.walletService.getAllWallets();
         }
-        return active ? this.walletService.getActiveWallets():
-            this.walletService.getAllWallets();
+        catch(error){
+            // In this case, I have return a bad request but there are multiple possibilities of error depending on the business logic
+            throw new BadRequestException('Eroor occured while processing the request, '+error);
+        }
     }
 
     @Get()
     getWalletById(@Param('walletId') walletId: number): Promise<Wallet> {
-        return this.walletService.getWalletById(walletId)
+        try { return this.walletService.getWalletById(walletId); }
+        catch (error) {
+            // In this case, I have return a bad request but there are multiple possibilities of error depending on the business logic
+            throw new BadRequestException('Eroor occured while processing the request, ' + error);
+        }
     }
 
     /*This is one example of the create API but there can be multiple options.

@@ -9,13 +9,25 @@ export class CustomerController {
     // Read all customers
     @Get()
     getAllCustomers(active: boolean = false): Promise<Customer[]> {
-        return active ? this.customerService.getAllActiveCustomers() :
-            this.customerService.getAllCustomers();
+        try{
+            return active ? this.customerService.getAllActiveCustomers() :
+                this.customerService.getAllCustomers();
+        }
+        catch(error){
+            // In this case, I have return a bad request but there are multiple possibilities of error depending on the business logic
+            throw new BadRequestException('Eroor occured while processing the request, '+error);
+        }
     }
 
     @Get()
     getCustomerById(@Param('customerId') customerId: string): Promise<Customer> {
-        return this.customerService.getCustomerById(customerId)
+        try{
+            return this.customerService.getCustomerById(customerId);
+        }
+        catch(error){
+            // In this case, I have return a bad request but there are multiple possibilities of error depending on the business logic
+            throw new BadRequestException('Eroor occured while processing the request, '+error);
+        }
     }
 
     @Post()

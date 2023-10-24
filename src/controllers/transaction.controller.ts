@@ -14,18 +14,24 @@ export class TransactionController {
     @Get()
     getAllTransactions(customerId: string = null, walletId: number = 0): Promise<Transaction[]> {
        
+        try{
+            if (customerId != null) {
+                return this.transactionService.getTransactionsByCustomer(customerId);
+            }
+            else if (walletId > 0) {
+                return this.transactionService.getTransactionsByWallet(walletId);
+            }
+            else if (walletId > 0 && customerId != null) {
+                return this.transactionService.getTransactionByCustomerAndWallet(walletId, customerId);
+            }
+            else {
+                return this.transactionService.getAllTransactions();
+            }
 
-        if (customerId != null) {
-            return this.transactionService.getTransactionsByCustomer(customerId);
         }
-        else if (walletId > 0) {
-            return this.transactionService.getTransactionsByWallet(walletId);
-        }
-        else if (walletId > 0 && customerId != null) {
-            return this.transactionService.getTransactionByCustomerAndWallet(walletId, customerId);
-        }
-        else {
-            return this.transactionService.getAllTransactions();
+        catch(error){
+            // In this case, I have return a bad request but there are multiple possibilities of error depending on the business logic
+            throw new BadRequestException('Eroor occured while processing the request, '+error);
         }
 
     }
