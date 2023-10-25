@@ -57,6 +57,8 @@ export class TransactionService {
             Transaction.create({ trans });
             var senderWallet = this.walletService.getWalletById(trans.senderWalletId);
             var reeciverwallet = this.walletService.getWalletById(trans.receiverWalletId);
+
+            // I have assumed that the transaction status is SUCCESS. This won't be the base if the transaction has failed
             this.updateSenderAndReceiverWallets(await senderWallet, await reeciverwallet, trans.amount);
 
             return trans;
