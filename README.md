@@ -31,7 +31,7 @@ The following steps are going to be followed as a lifecyle to rebuild the legacy
 # Source Code for the Coding Part
 ## Instructions
 
-* The application was impleted using ```Nest JS```, ```Typescript```, and ```SQL database```. This means that to run, you should have sql server running on your machine. I chose sql for best perfomance as the app will be serving more than 1 million users.
+* The application was implemented using ```Nest JS```, ```Typescript```, and ```SQL database```. This means that to run it, you should have sql server running on your machine. I chose sql for best perfomance as the app will be serving more than 1 million users.
 * It comprises APIs to create and read data from 3 tables, namely customers, wallets, and transactions. The code for the logic is in the ```src``` directory.
 
 ## Required packages
